@@ -6,6 +6,8 @@ import LoginPage from './pages/login'
 import RedfishPage from './pages/redfish'
 import { SessionProvider ,useSessionState } from './contexts/sessionContext'
 
+import PrivateRoute from './routes/PrivateRoute'
+
 import './App.css';
 
 const App = () => {
@@ -22,8 +24,10 @@ const App = () => {
       <main className="w-screen h-screen bg-gray-100">
         <Header/>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
+            {/* <Route path="/" element={<HomePage />} /> */}
+            <Route path='/' element={<PrivateRoute component={HomePage} />} />
+            <Route path="/login" element={ <LoginPage /> } />
+      
       
             {/* <Route path="redfish" element={<RedfishPage />}/> */}
               {/* <Route path="me" element={<OwnUserProfile />} />
