@@ -9,7 +9,8 @@ interface PropType {
 const PrivateRoute : FC<PropType> = ({component: Component}) =>{
     const session = useSessionState()
 
-    return session.id === '' ? <Navigate to='/login'/> : <Component/>   
+    // return session.id === '' ? <Navigate to='/login'/> : <Component/> 
+    return <Component/>   
 }
 
 export default PrivateRoute

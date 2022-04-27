@@ -12,7 +12,7 @@ const Header : FC = () =>{
     return(
         <header>
             <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-red-700 mb-3">
-                <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+                <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8  container flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                         <Link
                             className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
@@ -30,7 +30,7 @@ const Header : FC = () =>{
                     </div>
 
                     { session.id === '' ? (
-                            <div></div> 
+                            <div>dasdas</div> 
                         ) :(
                             <div
                                 className={
