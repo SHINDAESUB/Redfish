@@ -18,9 +18,6 @@ const HomePage : FC = () =>{
 
 const StyledSection = styled.section`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 `
