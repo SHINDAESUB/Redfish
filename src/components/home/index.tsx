@@ -5,36 +5,69 @@ import { Chart, registerables } from 'chart.js'
 import { Bar ,Line } from 'react-chartjs-2';
 import { useSessionState } from '../../contexts/sessionContext'
 
-const data = {
-  labels: ['1 月', '2 月', '3 月', '4 月', '5 月', '6 月', '7 月'],
+const barData = {
+  labels: ['17:35:13', '17:35:14' ,'17:35:15', '17:35:16' ,'17:35:17' ,'17:35:18' ,'17:35:19'],
   datasets: [
     {
-      label: '',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)',
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)',
-      ],
-      borderWidth: 1,
+      label: 'SNOW',
+      borderRadius:20,
+      data: [0.1 , 0.4, 0.2 ,0.3 ,0.7 ,0.4 ,0.6],
+      backgroundColor: "rgba(32, 214 , 155 ,1)",
+      borderColor: 'rgb(32, 214 , 155)',
+    
+    },
+    {
+        label: 'Thunder',
+        borderRadius:20,
+        data: [0.7 , 0.3, 0.1 ,0.2 ,0.3 ,0.2 ,0.8],
+        backgroundColor: "rgba(1, 98 , 255 ,1)",
+        borderColor: 'rgb(1, 98 , 255)',
     },
   ],
 };
 
-const options = {
+const barOptions = {
+    plugins:{
+        // legend:{
+        //     position:"top",
+        //     align: "start",
+        //     labels: {
+        //         boxWidth:7,
+        //         usePointStyle: true,
+        //         ponintStyle: "circle"
+        //     },
+        //     title:{
+        //         text: "노드",
+        //         display: true,
+        //         color:"red",
+        //         font:{
+        //             size:18,
+        //         }
+        //     }
+        // },
+    },
+
+    scales:{
+        xAxis:{
+            title:{
+                display: true,
+                text: "Time"
+            },
+
+            label: 'Thunder',
+            display: true,
+        },
+        yAxis:{
+            title:{
+                display: true,
+                text: "Load / Process (sec)"
+            },
+            display: true,
+
+        }
+    },
+
+
     responsive:true
   };
 
@@ -75,7 +108,9 @@ const lineOptions = {
         yAxis:{
             display:false
         }
-    }
+    },
+
+    responsive:false
 
 }
 
@@ -128,38 +163,50 @@ const Home : FC = () =>{
     
     return(
         <StyleArtcle>
-            <div className='dashTitle'>
-                <StyleTest>
-                    <div className='text'>
-                        <h2>가동 시간</h2>
-                        <p className='title'>204 일 5 시간</p>
+            <DetailRow>
+                <div className="col">
+                    <div className='content'>
+                        <div className='title'>가동 시간</div>
+                        <div className='value'>204 일 5 시간</div>
                     </div>
                     <div className="chart">
                         <Line data={lineData} options={lineOptions} />
                     </div>
-                </StyleTest>
-                <StyleTest>
-                    <div className='text'>
-                        <h2>가용 노드</h2>
-                        <p className='title'>4 개</p>
-                        <span className='value'>1 ▲</span><span className='size'> 지난달 대비</span>
+                </div>
+                <div className="col">
+                    <div className='content'>
+                        <div className='title'>가용 노드</div>
+                        <div className='value'>4 개</div>
+                        <div className='detail'>1 ▲<span className='size'> 지난달 대비</span></div>
                     </div>
                     <div className="chart">
                         <Line data={lineData} options={lineOptions} />
                     </div>
-                </StyleTest>
-                <StyleTest>
-                    <div className='text'>
-                        <h2>접근 로그</h2>
-                        <p className='title'>87</p>
-                        <span className='value'>14.3 ▲</span><span className='size'> 지난달 대비</span>
+                </div>
+                <div className="col">
+                    <div className='content'>
+                        <div className='title'>접근 로그</div>
+                        <div className='value'>87</div>
+                        <div className='detail'>14.3 ▲<span className='size'> 지난달 대비</span></div>
                     </div>
                     <div className="chart">
                         <Line data={lineData} options={lineOptions} />
                     </div>
-                </StyleTest>
-            </div>
-            <Bar data={data} options={options} />
+                </div>
+            </DetailRow>
+            <DetailRow1>
+                <div className="col1">
+                    <div className='title'>부하 평균</div>
+                    <Line data={barData} options={barOptions} />
+                
+                </div> 
+                <div className="col2">
+                    <div className='title'>CPU 사용량</div>
+                </div> 
+
+            </DetailRow1>
+
+
             <button
                 className="mx-2 " 
                 type="button"
@@ -190,63 +237,68 @@ const Home : FC = () =>{
 
 export default Home
 
-const StyleTest = styled.div`
+const DetailRow = styled.div`
     position: relative;
     display: flex;
-    padding: 1.25rem;
-    border: 0.5px solid #e5e7eb;
-    border-radius: 0.125rem;
-    box-shadow: 1px 1px 1px 1px whitesmoke;
-    flex-basis: 32.3%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100%;
 
-    .text{
-        z-index:2;
-        position: absolute;
-        width: 100%;
-        h2{
-            font-size: 1.125rem;
-            color: gray;
-        }
-        .value{
-            color: red;
-            font-size: 0.875rem;
-            line-height: 1.5715;
-            font-weight: 600;
-        }
-        .title{
-            color: black;
-            font-size: 1.88rem;
-            line-height: 1.33;
-            font-weight: 700;
-        }
-        .size{
-            font-size: 0.75rem;
-            line-height: 1.5;
-            color: lightgray;
-            font-weight: 500;
-        }
-    }
-    .chart{
-        position: relative;
-        width: 70%;
-        /* position: absolute; */
-        margin-left: auto;
-        /* top:5px; */
-        /* position: relative; */
-        /* position: absolute; */
+    .col{
+        display: flex;
+        padding: 1.25rem;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 0.125rem;
+        box-shadow: 1px 1px 1px 1px whitesmoke;
 
+        @media (min-width: 480px){
+            flex:100%;
+            max-width: 100%;
+        }
 
+        @media (min-width: 1200px){
+            flex-basis: 32.3%;
+            max-width: 32.3%;
+        }
+
+        .content{
+            position: absolute;
+
+        }
+        .chart{
+            margin-left: auto;
+        }
     }
 `
 
+const DetailRow1 = styled.div`
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    padding: 20px 0px;
+
+    .col1{
+        flex-basis: 66.2%;
+        padding: 1.25rem;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 0.125rem;
+        box-shadow: 1px 1px 1px 1px whitesmoke;
+    }
+
+    .col2{
+        flex-basis: 32.3%;
+        padding: 1.25rem;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 0.125rem;
+        box-shadow: 1px 1px 1px 1px whitesmoke;
+    }
+`
 
 const StyleArtcle = styled.article`
     position: relative;
     width: 100%;
-    /* display: flex; */
-    /* flex-wrap: nowrap; */
-    /* align-items: center; */
-    /* justify-content: space-between; */
     max-width: 80rem;
     margin-left: auto;
     margin-right: auto;
@@ -254,12 +306,28 @@ const StyleArtcle = styled.article`
     button{
         background-color:red
     }
-    .dashTitle{
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
 
+    .title{
+                font-size: 1.125rem;
+                color: gray;
+            }
+            .detail{
+                color: red;
+                font-size: 0.875rem;
+                line-height: 1.5715;
+                font-weight: 600;
+                .size{
+                    font-size: 0.75rem;
+                    line-height: 1.5;
+                    color: lightgray;
+                    font-weight: 500;
+                }
+            }
+            .value{
+                color: black;
+                font-size: 1.88rem;
+                line-height: 1.33;
+                font-weight: 700;
+            }
 
 `
