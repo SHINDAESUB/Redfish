@@ -30,7 +30,7 @@ const Header : FC = () =>{
                     </div>
 
                     { session.id === '' ? (
-                            <div>dasdas</div> 
+                            <div></div> 
                         ) :(
                             <div
                                 className={

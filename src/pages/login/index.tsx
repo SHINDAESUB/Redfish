@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 const LoginPage : FC = () =>{
     return(
-        <div>
+        <div >
             <Login/>
         </div>
     )

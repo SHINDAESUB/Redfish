@@ -164,7 +164,7 @@ const Home : FC = () =>{
     return(
         <StyleArtcle>
             <DetailRow>
-                <div className="col">
+                <div className="col common">
                     <div className='content'>
                         <div className='title'>가동 시간</div>
                         <div className='value'>204 일 5 시간</div>
@@ -173,7 +173,7 @@ const Home : FC = () =>{
                         <Line data={lineData} options={lineOptions} />
                     </div>
                 </div>
-                <div className="col">
+                <div className="col common">
                     <div className='content'>
                         <div className='title'>가용 노드</div>
                         <div className='value'>4 개</div>
@@ -183,7 +183,7 @@ const Home : FC = () =>{
                         <Line data={lineData} options={lineOptions} />
                     </div>
                 </div>
-                <div className="col">
+                <div className="col common">
                     <div className='content'>
                         <div className='title'>접근 로그</div>
                         <div className='value'>87</div>
@@ -195,12 +195,12 @@ const Home : FC = () =>{
                 </div>
             </DetailRow>
             <DetailRow1>
-                <div className="col1">
+                <div className="col1 common">
                     <div className='title'>부하 평균</div>
                     <Line data={barData} options={barOptions} />
                 
                 </div> 
-                <div className="col2">
+                <div className="col2 common">
                     <div className='title'>CPU 사용량</div>
                 </div> 
 
@@ -246,19 +246,16 @@ const DetailRow = styled.div`
 
     .col{
         display: flex;
-        padding: 1.25rem;
-        border: 0.5px solid #e5e7eb;
-        border-radius: 0.125rem;
-        box-shadow: 1px 1px 1px 1px whitesmoke;
-
+        
         @media (min-width: 480px){
-            flex:100%;
-            max-width: 100%;
+            flex:1 1 100% ;
+            /* max-width: 100%; */
         }
 
         @media (min-width: 1200px){
-            flex-basis: 32.3%;
-            max-width: 32.3%;
+            flex:0 0 32.3% ;
+            /* flex-basis: 32.3%; */
+            /* max-width: 32.3%; */
         }
 
         .content{
@@ -280,19 +277,24 @@ const DetailRow1 = styled.div`
     padding: 20px 0px;
 
     .col1{
-        flex-basis: 66.2%;
-        padding: 1.25rem;
-        border: 0.5px solid #e5e7eb;
-        border-radius: 0.125rem;
-        box-shadow: 1px 1px 1px 1px whitesmoke;
+        @media (min-width: 480px){
+            flex:1 1 100% ;
+        }
+
+        @media (min-width: 1200px){
+            flex:0 0 66.2% ;
+        }
     }
 
     .col2{
-        flex-basis: 32.3%;
-        padding: 1.25rem;
-        border: 0.5px solid #e5e7eb;
-        border-radius: 0.125rem;
-        box-shadow: 1px 1px 1px 1px whitesmoke;
+        @media (min-width: 480px){
+            flex:1 1 100% ;
+            max-width: 100%;
+        }
+
+        @media (min-width: 1200px){
+            flex:0 0 32.3% ;
+        }
     }
 `
 
@@ -306,6 +308,14 @@ const StyleArtcle = styled.article`
     button{
         background-color:red
     }
+
+    .common{
+        width: 100%; //차트의 반응형 사이즈를 위해
+        padding: 1.25rem;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 0.125rem;
+        box-shadow: 1px 1px 1px 1px whitesmoke;
+    }   
 
     .title{
                 font-size: 1.125rem;
